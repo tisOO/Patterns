@@ -1,85 +1,104 @@
 <?php
-	/***
-	* Example from "Head first Design Patterns". Pattern "Strategy"
-	*
-	*
-	***/
-	abstract class Duck {
-		public $flyBehavior;
-		public $quackBehavior;
+/***
+ * Example from "Head first Design Patterns". Pattern "Strategy"
+ *
+ *
+ ***/
+abstract class Duck
+{
+    public $flyBehavior;
+    public $quackBehavior;
 
-		public function __construct() {
-		}
+    public function __construct()
+    {
+    }
 
-		abstract public function display();
-		
-		public function performFly() {
-			$this->flyBehavior->fly();
-		}
+    abstract public function display();
 
-		public function performQuack() {
-			$this->quackBehavior->quack();
-		}
+    public function performFly()
+    {
+        $this->flyBehavior->fly();
+    }
 
-		public function swim() {
-			echo "All ducks float, even decoys<br />";
-		}
-	}
+    public function performQuack()
+    {
+        $this->quackBehavior->quack();
+    }
 
-	class MallardDuck extends Duck {
-		
-		public function __construct() {
-			$this->quackBehavior = new Quacker();
-			$this->flyBehavior = new FlyWithWings();
-		}
+    public function swim()
+    {
+        echo "All ducks float, even decoys<br />";
+    }
+}
 
-		public function display() {
-			echo "I'm real Mallard duck<br />";
-		}
-	}
+class MallardDuck extends Duck
+{
 
-	interface FlyBehavior {
-		public function fly();
-	}
+    public function __construct()
+    {
+        $this->quackBehavior = new Quacker();
+        $this->flyBehavior = new FlyWithWings();
+    }
 
-	class FlyWithWings implements FlyBehavior {
-		public function fly() {
-			echo "I'm flying!!<br />";
-		}
-	}
+    public function display()
+    {
+        echo "I'm real Mallard duck<br />";
+    }
+}
 
-	class FlyNoWay implements FlyBehavior {
-		public function fly() {
-			echo "I can't fly<br />";
-		}
-	}
+interface FlyBehavior
+{
+    public function fly();
+}
 
-	interface QuackBehavior {
-		public function quack();
-	}
+class FlyWithWings implements FlyBehavior
+{
+    public function fly()
+    {
+        echo "I'm flying!!<br />";
+    }
+}
 
-	class Quacker implements QuackBehavior {
-		public function quack() {
-			echo "Quack<br />";
-		}
-	}
+class FlyNoWay implements FlyBehavior
+{
+    public function fly()
+    {
+        echo "I can't fly<br />";
+    }
+}
 
-	class MuteQuack implements QuackBehavior {
-		public function quack() {
-			echo "<< Silence >>";
-		}
-	}
+interface QuackBehavior
+{
+    public function quack();
+}
 
-	class Squeak implements QuackBehavior {
-		public function quack() {
-			echo "Squeak <br />";
-		}
-	}
-	
-	$mallard = new MallardDuck();
-	
-	$mallard->performQuack();
-	$mallard->performFly();
-	$mallard->display();
-	
-?>
+class Quacker implements QuackBehavior
+{
+    public function quack()
+    {
+        echo "Quack<br />";
+    }
+}
+
+class MuteQuack implements QuackBehavior
+{
+    public function quack()
+    {
+        echo "<< Silence >>";
+    }
+}
+
+class Squeak implements QuackBehavior
+{
+    public function quack()
+    {
+        echo "Squeak <br />";
+    }
+}
+
+$mallard = new MallardDuck();
+
+$mallard->performQuack();
+$mallard->performFly();
+$mallard->display();
+
