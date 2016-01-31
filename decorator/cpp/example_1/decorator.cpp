@@ -11,11 +11,13 @@ protected:
   string description = "Unknown Beverage";
 public:
 
-  virtual string getDescription() {
+  virtual ~Beverage() {}
+
+  virtual string getDescription() const {
     return this->description;
   }
 
-  virtual double cost() = 0;
+  virtual double cost() const = 0;
 };
 
 class CondimentDecorator: public Beverage
@@ -24,9 +26,9 @@ protected:
   Beverage* beverage;
 
 public:
-  virtual string getDescription() = 0;
+  string getDescription() const override {};
 
-  ~CondimentDecorator() {
+  ~CondimentDecorator() override {
     delete beverage;
   }
 };
@@ -40,7 +42,7 @@ public:
     this->description = "Espresso";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return 1.99;
   }
 };
@@ -52,7 +54,7 @@ public:
     this->description = "House Blend Coffee";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return .89;
   }
 };
@@ -65,7 +67,7 @@ public:
     this->description = "Dark Roast Coffee";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return .99;
   }
 };
@@ -77,7 +79,7 @@ public:
     this->description = "Decaf Coffee";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return .77;
   }
 };
@@ -93,11 +95,11 @@ public:
     this->beverage = beverage_;
   }
 
-  virtual string getDescription() {
+  string getDescription() const override {
     return this->beverage->getDescription() + ", Mocha";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return .20 + this->beverage->cost();
   }
 };
@@ -110,11 +112,11 @@ public:
     this->beverage = beverage_;
   }
 
-  virtual string getDescription() {
+  string getDescription() const override {
     return this->beverage->getDescription() + ", Soy";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return .31 + this->beverage->cost();
   }
 };
@@ -127,11 +129,11 @@ public:
     this->beverage = beverage_;
   }
 
-  virtual string getDescription() {
+  string getDescription() const override {
     return this->beverage->getDescription() + ", Whip";
   }
 
-  virtual double cost() {
+  double cost() const override {
     return .25 + this->beverage->cost();
   }
 };
