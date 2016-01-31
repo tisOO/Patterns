@@ -41,8 +41,7 @@ public:
   }
 
   void notifyObservers() {
-    for (auto i : this->observers) {
-      Observer* observer = i;
+    for (auto observer : this->observers) {
       observer->update(temperature, humidity, pressure);
     }
   }
